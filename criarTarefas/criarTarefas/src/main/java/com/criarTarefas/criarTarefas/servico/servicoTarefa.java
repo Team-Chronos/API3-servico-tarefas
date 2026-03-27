@@ -1,5 +1,7 @@
 package com.criarTarefas.criarTarefas.servico;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +14,52 @@ public class servicoTarefa {
 
     @Autowired
     private repositorioTarefa repositorioTarefa;
-
+    
     public Tarefa criarTarefa(tarefaDTO dto) {
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo(dto.getTitulo());
         tarefa.setDescricao(dto.getDescricao());
-        tarefa.setResponsavel(dto.getResponsavel());
-        tarefa.setPrazo(dto.getPrazo());
+        tarefa.setResponsavel(dto.getResponsavelId());
+        tarefa.setTempoMaximoMinutos(dto.getTempoMaximoMinutos());
         tarefa.setStatus(dto.getStatus());
         
-
         return repositorioTarefa.save(tarefa);
+    }
+
+    public List<Tarefa> listarTarefas() {
+        return repositorioTarefa.findAll();
+    }
+
+    public Tarefa buscarTarefaPorId(Long id) {
+        return repositorioTarefa.findById(id)
+            .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));
+    }
+
+    public Tarefa atualizarTarefa(Long id, tarefaDTO dto) {
+        Tarefa tarefa = buscarTarefaPorId(id);
+        
+        tarefa.setTitulo(dto.getTitulo());
+        tarefa.setDescricao(dto.getDescricao());
+        tarefa.setResponsavel(dto.getResponsavelId());
+        tarefa.setTempoMaximoMinutos(dto.getTempoMaximoMinutos());
+        tarefa.setStatus(dto.getStatus());
+        
+        return repositorioTarefa.save(tarefa);
+    }
+
+    public Tarefa atualizarStatusTarefa(Long id, String status) {
+        Tarefa tarefa = buscarTarefaPorId(id);
+        
+        if (status.startsWith("\"") && status.endsWith("\"")) {
+            status = status.substring(1, status.length() - 1);
+        }
+        
+        tarefa.setStatus(status);
+        return repositorioTarefa.save(tarefa);
+    }
+
+    public void deletarTarefa(Long id) {
+        Tarefa tarefa = buscarTarefaPorId(id);
+        repositorioTarefa.delete(tarefa);
     }
 }

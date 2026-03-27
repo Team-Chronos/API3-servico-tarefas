@@ -1,6 +1,7 @@
 package com.criarTarefas.criarTarefas.modelo.DTO;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class tarefaDTO {
 
@@ -10,14 +11,14 @@ public class tarefaDTO {
     @NotBlank(message = "Descrição não pode estar vazia")
     private String descricao;
 
-    @NotBlank(message = "Responsável é necessário")
-    private String responsavel;
-
-    @NotBlank(message = "Prazo é obrigatório")
-    private String prazo;
+    @NotNull(message = "Responsável é necessário")
+    private Long responsavelId;
 
     @NotBlank(message = "Status é obrigatório")
     private String status;
+
+    @NotNull(message = "Tempo máximo é obrigatório")
+    private Number tempoMaximoMinutos;
 
     public String getTitulo() {
         return titulo;
@@ -35,20 +36,12 @@ public class tarefaDTO {
         this.descricao = descricao;
     }
 
-    public String getResponsavel() {
-        return responsavel;
+    public Long getResponsavelId() {
+        return responsavelId;
     }
 
-    public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
-    }
-
-    public String getPrazo() {
-        return prazo;
-    }
-
-    public void setPrazo(String prazo) {
-        this.prazo = prazo;
+    public void setResponsavelId(Long responsavelId) {
+        this.responsavelId = responsavelId;
     }
 
     public String getStatus() {
@@ -58,4 +51,13 @@ public class tarefaDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Number getTempoMaximoMinutos() {
+        return tempoMaximoMinutos;
+    }
+
+    public void setTempoMaximoMinutos(Number tempoMaximoMinutos) {
+        this.tempoMaximoMinutos = tempoMaximoMinutos;
+    }
+
 }

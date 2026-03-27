@@ -1,14 +1,10 @@
 package com.criarTarefas.criarTarefas.modelo;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Tarefa {
@@ -17,9 +13,6 @@ public class Tarefa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> itens;
-
     @Column(nullable = false)
     private String titulo;
 
@@ -27,24 +20,16 @@ public class Tarefa {
     private String descricao;
 
     @Column(nullable = false)
-    private String responsavel;
+    private Long responsavelId;
 
     @Column(nullable = false)
-    private String prazo;
+    private Number tempoMaximoMinutos;
 
     @Column(nullable = false)
     private String status;
 
     public Long getId() {
         return id;
-    }
-
-    public List<Item> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
     }
 
     public String getTitulo() {
@@ -63,20 +48,20 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public String getResponsavel() {
-        return responsavel;
+    public Long getResponsavel() {
+        return responsavelId;
     }
 
-    public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
+    public void setResponsavel(Long responsavel) {
+        this.responsavelId = responsavel;
     }
 
-    public String getPrazo() {
-        return prazo;
+    public Number getTempoMaximoMinutos() {
+        return tempoMaximoMinutos;
     }
 
-    public void setPrazo(String prazo) {
-        this.prazo = prazo;
+    public void setTempoMaximoMinutos(Number tempoMaximoMinutos) {
+        this.tempoMaximoMinutos = tempoMaximoMinutos;
     }
 
     public String getStatus() {
