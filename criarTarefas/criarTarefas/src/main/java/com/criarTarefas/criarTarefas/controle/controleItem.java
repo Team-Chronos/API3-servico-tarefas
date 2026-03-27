@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,4 +28,10 @@ public class controleItem {
         Item itemCriado = servicoItem.criarItem(itemDTO);
         return new ResponseEntity<>(itemCriado, HttpStatus.CREATED);
     }
+
+    @GetMapping("/tarefa/{tarefaId}")
+    public ResponseEntity<Item> listarItensPorTarefa(@PathVariable Long tarefaId) {
+    Item itens = servicoItem.listarItensPorTarefa(tarefaId);
+    return ResponseEntity.ok(itens);
+}
 }
