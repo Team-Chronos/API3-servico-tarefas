@@ -36,6 +36,10 @@ public class servicoTarefa {
         return repositorioTarefa.findByProjetoId(projetoId);
     }
 
+    public List<Tarefa> listarTarefasPorResponsavel(Long id) {
+        return repositorioTarefa.findByResponsavelId(id);
+    }
+
     public Tarefa buscarTarefaPorId(Long id) {
         return repositorioTarefa.findById(id)
             .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com ID: " + id));

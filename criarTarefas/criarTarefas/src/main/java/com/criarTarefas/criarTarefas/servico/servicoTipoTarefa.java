@@ -1,5 +1,6 @@
 package com.criarTarefas.criarTarefas.servico;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,13 @@ public class servicoTipoTarefa {
         tipoTarefa.setNome(dto.getNome());
         return repositorioTipoTarefa.save(tipoTarefa);
     }
+
+    public List<TipoTarefa> listarTipoTarefas(){
+        return repositorioTipoTarefa.findAll();
+    };
+
+    public List<TipoTarefa> listarTipoTarefasId(Long id){
+        return repositorioTipoTarefa.findById(id).stream().toList();
+    };
+
 }
