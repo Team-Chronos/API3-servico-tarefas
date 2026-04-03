@@ -34,7 +34,6 @@ public class servicoComunicacaoProjeto {
     @GetMapping("/todos")
     public ResponseEntity<?> listarTodosProjetos() {
         
-        System.out.println("=== Listando todos os projetos ===");
         
         try {
             String url = apiUrl;
@@ -59,7 +58,6 @@ public class servicoComunicacaoProjeto {
     @GetMapping("/{id}")
     public ResponseEntity<?> comunicarProjeto(@PathVariable("id") Integer id) {
         
-        System.out.println("=== Consultando projeto ID: " + id);
         
         try {
             String url = apiUrl + "/" + id;
